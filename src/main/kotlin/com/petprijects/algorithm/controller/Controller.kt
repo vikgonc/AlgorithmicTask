@@ -4,10 +4,12 @@ import com.petprijects.algorithm.model.Consumer
 import com.petprijects.algorithm.model.Resource
 import com.petprijects.algorithm.repository.ConsumerRepository
 import com.petprijects.algorithm.repository.ResourceRepository
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
@@ -26,14 +28,31 @@ class Controller(
     @PostMapping("/resources")
     fun createResource(@Valid @RequestBody resource: Resource) = resourceRepo.save(resource)
 
-    @PostMapping("/consumer")
+    @PostMapping("/consumers")
     fun createConsumer(@Valid @RequestBody consumer: Consumer) = consumerRepo.save(consumer)
 
     @DeleteMapping("/resources/{id}")
     fun removeResource(@PathVariable id: Long) = resourceRepo.deleteById(id)
 
-    @DeleteMapping("/consumer/{id}")
+    @DeleteMapping("/consumers/{id}")
     fun removeConsumer(@PathVariable id: Long) = consumerRepo.deleteById(id)
+
+    @PutMapping("/consumers/{id}")
+    fun updateConsumer(
+        @PathVariable id: Long,
+        @Valid @RequestBody consumer: Consumer
+    ): ResponseEntity<Consumer> {
+        val consumerById = consumerRepo.findConsumerById(id)
+        val responseEntity: ResponseEntity<Consumer> = consumerById?.let {
+            val responseBody = consumerRepo.save(consumer.copy(id = id))
+            ResponseEntity
+                .status(200)
+                .body(responseBody)
+        } ?: ResponseEntity
+            .status(404)
+            .body(null)
+        return responseEntity
+    }
 }
 
 

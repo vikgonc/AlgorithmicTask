@@ -17,5 +17,5 @@ data class Resource(
 
     @field:Min(450)
     @field:Max(800)
-    val capacity: Int,
+    val capacity: Int
 )

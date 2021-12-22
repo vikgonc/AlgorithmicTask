@@ -21,7 +21,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
 	implementation("mysql:mysql-connector-java:8.0.25")
 	implementation("org.springframework.boot:spring-boot-starter-validation:2.6.1")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.1")

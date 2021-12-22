@@ -7,6 +7,7 @@ import org.springframework.boot.runApplication
 class AlgorithmApplication
 
 //451: Invalid request body!
+//Version with no properties
 fun main(args: Array<String>) {
     runApplication<AlgorithmApplication>(*args)
 }
